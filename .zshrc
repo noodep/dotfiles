@@ -54,6 +54,20 @@ plugins=(git common-aliases)
 # User configuration
 
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Library/TeX/texbin"
+
+# Export java_home for maven
+export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/"
+
+# Configure ant
+export ANT_HOME="/usr/share/ant"
+export PATH=$PATH:$ANT_HOME/bin
+alias a="ant"
+
+# Configure maven
+export M2_HOME="/usr/local/maven"
+export M2=$M2_HOME/bin
+export PATH=$M2:$PATH
+
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -82,3 +96,4 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias sublime="open -a Sublime\ Text"
