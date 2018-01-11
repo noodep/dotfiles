@@ -19,3 +19,16 @@ noremap L N
 
 noremap ; :
 noremap : ;
+
+" Remap netrw for dvorak
+augroup netrw
+	autocmd!
+	autocmd filetype netrw call Netrw_remap()
+augroup END
+
+function! Netrw_remap()
+	noremap <buffer> d h
+	noremap <buffer> h j
+	noremap <buffer> t k
+	noremap <buffer> n l
+endfunction
