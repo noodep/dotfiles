@@ -16,3 +16,6 @@ noremap j d
 noremap k t
 noremap l n
 noremap L N
+
+noremap ; :
+noremap : ;
