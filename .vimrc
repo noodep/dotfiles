@@ -15,3 +15,4 @@ noremap n l
 noremap j d
 noremap k t
 noremap l n
+noremap L N
