@@ -13,8 +13,17 @@ filetype plugin indent on
 set hidden
 
 " Sets tab length
-set tabstop=2
-set shiftwidth=2
+set tabstop=4
+set shiftwidth=4
+
+" Disables wrapping
+set nowrap
+
+" Turns on current line highlighting
+set cursorline
+
+" Turns on relative numbers on the gutter
+set relativenumber
 
 " Sets encoding
 set encoding=utf-8
