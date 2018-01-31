@@ -54,6 +54,14 @@ noremap <C-w>n <C-w>l
 noremap ; :
 noremap : ;
 
+" Utility function to restore the view to its previous state
+" Can be used to go back to the original cursor location when modifying the file on save
+function! RestoreView(arg)
+  let l:view = winsaveview()
+  execute a:arg
+  call winrestview(l:view)
+endfunction
+
 " Remaps netrw for dvorak
 augroup netrw
 	autocmd!
@@ -69,14 +77,14 @@ endfunction
 
 " Adds version incrementer function
 " \zs sets start of match so we only have to replace the actual number
-command IncVersionNumber if &modified | %s/@version\s\zs\(\d\+\.\d\+\)/\=str2float(submatch(1))+0.01/g | endif
+command! IncVersionNumber if &modified | %s/@version\s\zs\(\d\+\.\d\+\)/\=str2float(submatch(1))+0.01/g | endif
 
 " Strips trailing whitespace
-command StripTrailingWhitespace %s/\s\+$//e
+command! StripTrailingWhitespace %s/\s\+$//e
 
 augroup noodepjs
 	autocmd!
-	autocmd BufWritePre *.js :IncVersionNumber
-	autocmd BufWritePre *.js :StripTrailingWhitespace
+	autocmd BufWritePre *.js call RestoreView('IncVersionNumber')
+	autocmd BufWritePre *.js call RestoreView('StripTrailingWhitespace')
 augroup END
 
