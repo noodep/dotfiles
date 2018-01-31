@@ -6,7 +6,7 @@ syntax enable
 
 colorscheme noodep
 
-" Enables loading plugin and indent file based on the filetype 
+" Enables loading plugin and indent file based on the filetype
 filetype plugin indent on
 
 " Allows new files openning when the current buffer has unsaved changes
@@ -21,6 +21,9 @@ set nowrap
 
 " Turns on current line highlighting
 set cursorline
+
+" Turns on search highlighting
+set hlsearch
 
 " Turns on relative numbers on the gutter
 set relativenumber
@@ -54,12 +57,26 @@ noremap : ;
 " Remaps netrw for dvorak
 augroup netrw
 	autocmd!
-	autocmd filetype netrw call Netrw_remap()
+	autocmd filetype netrw call NetrwRemap()
 augroup END
 
-function! Netrw_remap()
+function! NetrwRemap()
 	noremap <buffer> d h
 	noremap <buffer> h j
 	noremap <buffer> t k
 	noremap <buffer> n l
 endfunction
+
+" Adds version incrementer function
+" \zs sets start of match so we only have to replace the actual number
+command IncVersionNumber if &modified | %s/@version\s\zs\(\d\+\.\d\+\)/\=str2float(submatch(1))+0.01/g | endif
+
+" Strips trailing whitespace
+command StripTrailingWhitespace %s/\s\+$//e
+
+augroup noodepjs
+	autocmd!
+	autocmd BufWritePre *.js :IncVersionNumber
+	autocmd BufWritePre *.js :StripTrailingWhitespace
+augroup END
+
