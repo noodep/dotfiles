@@ -50,6 +50,12 @@ noremap <C-w>h <C-w>j
 noremap <C-w>t <C-w>k
 noremap <C-w>n <C-w>l
 
+" Remaps window navigation to shift+{nav-key}
+noremap D <C-w>h
+noremap H <C-w>j
+noremap T <C-w>k
+noremap N <C-w>l
+
 " Remaps command key to avoid using shift
 noremap ; :
 noremap : ;
