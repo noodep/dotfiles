@@ -27,6 +27,7 @@ set hlsearch
 
 " Turns on relative numbers on the gutter
 set relativenumber
+set number
 
 " Sets encoding
 set encoding=utf-8
@@ -59,6 +60,16 @@ noremap N <C-w>l
 " Remaps command key to avoid using shift
 noremap ; :
 noremap : ;
+
+" Remaps omnicompletion trigger to tab
+" also highlights the first entry on completion
+inoremap <tab> <C-X><C-O><Down>
+
+" Custom completion behavior
+" menuone - Shows the menu even if there is only one item
+" noselect - Prevents auto insert of the first matching result
+" previow - Shows additionnal information when available
+set completeopt=menuone,noselect,preview
 
 " Utility function to restore the view to its previous state
 " Can be used to go back to the original cursor location when modifying the file on save
