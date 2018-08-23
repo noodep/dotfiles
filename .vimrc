@@ -9,6 +9,9 @@ colorscheme noodep
 " Enables loading plugin and indent file based on the filetype
 filetype plugin indent on
 
+" Sets space as leader
+let mapleader = "\<Space>"
+
 " Allows new files openning when the current buffer has unsaved changes
 set hidden
 
@@ -60,6 +63,10 @@ noremap N <C-w>l
 " Remaps command key to avoid using shift
 noremap ; :
 noremap : ;
+
+" Remaps bd to switch to the alternate buffer before deleting the current
+" buffer
+noremap <silent> <leader>bd :b#<bar>bd #<CR>
 
 " Remaps omnicompletion trigger to tab
 " also highlights the first entry on completion
