@@ -106,9 +106,3 @@ command! IncVersionNumber if &modified | %s/@version\s\zs\(\d\+\.\d\+\)/\=str2fl
 " Strips trailing whitespace
 command! StripTrailingWhitespace %s/\s\+$//e
 
-augroup noodepjs
-	autocmd!
-	autocmd BufWritePre *.js call RestoreView('IncVersionNumber')
-	autocmd BufWritePre *.js call RestoreView('StripTrailingWhitespace')
-augroup END
-
