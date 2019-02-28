@@ -10,6 +10,9 @@ hi String ctermfg=2
 hi Function ctermfg=4
 hi Keyword ctermfg=5
 
+" Listchars characters. Displays whitespace symbols with Comments color
+hi SpecialKey ctermfg=8
+
 " Foreground = #EEFFFF
 " Background = #263238
 " Selection  = #565A6D

@@ -19,6 +19,10 @@ set hidden
 set tabstop=4
 set shiftwidth=4
 
+" Displays whitespace characters
+set list
+set listchars=space:·,tab:\|-,trail:-
+
 " Disables wrapping
 set nowrap
 
