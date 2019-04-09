@@ -72,6 +72,10 @@ noremap : ;
 " buffer
 noremap <silent> <leader>bd :b#<bar>bd #<CR>
 
+
+" Remaps go to tag to <leader> t
+noremap <leader>t <C-]>
+
 " Remaps omnicompletion trigger to tab
 " also highlights the first entry on completion
 inoremap <tab> <C-X><C-O><Down>

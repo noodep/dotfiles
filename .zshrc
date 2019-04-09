@@ -100,5 +100,6 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias sublime="open -a Sublime\ Text"
+alias ctags="/usr/local/bin/ctags"
 
 
