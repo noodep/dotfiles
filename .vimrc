@@ -72,13 +72,18 @@ noremap : ;
 " buffer
 noremap <silent> <leader>bd :b#<bar>bd #<CR>
 
-
 " Remaps go to tag to <leader> t
 noremap <leader>t <C-]>
 
-" Remaps omnicompletion trigger to tab
+" Remaps got to next method start to <leader>+m.
+noremap M ]m
+
+" Remaps got to previous method start to <leader>+M.
+noremap <C-m> [m
+
+" Remaps keyword auto completion trigger to tab
 " also highlights the first entry on completion
-inoremap <tab> <C-X><C-O><Down>
+inoremap <tab> <C-X><C-N><Down>
 
 " Custom completion behavior
 " menuone - Shows the menu even if there is only one item
