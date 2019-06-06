@@ -1,0 +1,3 @@
+[submodule "vim/pack/noodep/start/vim-javascript"]
+	path = vim/pack/noodep/start/vim-javascript
+	url = https://github.com/pangloss/vim-javascript.git

@@ -1,8 +1,7 @@
-" Enable folding based on curly braces
-set foldmethod=marker
-set foldmarker={,}
+" Starts without folds
 set nofoldenable
 
+" Enables header version incrementing and white space trailing on .js files
 augroup noodepjs
 	autocmd!
 	autocmd BufWritePre *.js call RestoreView('IncVersionNumber')
