@@ -99,7 +99,8 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias sublime="open -a Sublime\ Text"
+alias ranger="/Library/Frameworks/Python.framework/Versions/Current/bin/ranger"
 alias ctags="/usr/local/bin/ctags"
+alias vim="echo \'use nvim you goof\'"
 
 
