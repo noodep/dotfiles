@@ -12,6 +12,9 @@ filetype plugin indent on
 " Sets space as leader
 let mapleader = "\<Space>"
 
+" Keeps the cursor line away from the edges.
+set scrolloff=30
+
 " Allows new files openning when the current buffer has unsaved changes
 set hidden
 
@@ -53,16 +56,11 @@ noremap k t
 noremap l n
 noremap L N
 
-noremap <C-w>d <C-w>h
-noremap <C-w>h <C-w>j
-noremap <C-w>t <C-w>k
-noremap <C-w>n <C-w>l
-
-" Remaps window navigation to shift+{nav-key}
-noremap D <C-w>h
-noremap H <C-w>j
-noremap T <C-w>k
-noremap N <C-w>l
+" Remaps window navigation to control+{nav-key}
+noremap <C-d> <C-w>h
+noremap <C-h> <C-w>j
+noremap <C-t> <C-w>k
+noremap <C-n> <C-w>l
 
 " Remaps command key to avoid using shift
 noremap ; :
@@ -72,8 +70,9 @@ noremap : ;
 " buffer
 noremap <silent> <leader>bd :b#<bar>bd #<CR>
 
-" Remaps go to tag to <leader> t
-noremap <leader>t <C-]>
+" Remaps go to tag to <leader> h
+noremap <leader>h <C-]>
+noremap <leader>t <C-t>
 
 " Remaps keyword auto completion trigger to tab
 " also highlights the first entry on completion
