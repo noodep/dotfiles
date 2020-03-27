@@ -53,24 +53,6 @@ plugins=(git common-aliases)
 
 # User configuration
 
-# Export java_home for maven
-export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/"
-
-# Configure ant
-export ANT_HOME="/usr/share/ant"
-export PATH=$PATH:$ANT_HOME/bin
-alias a="ant"
-
-# Configure maven
-export M2_HOME="/usr/local/maven"
-export M2=$M2_HOME/bin
-export PATH=$M2:$PATH
-
-# Configure gradle
-export GRADLE_HOME="/usr/local/gradle"
-export GRADLE=$GRADLE_HOME/bin
-export PATH=$GRADLE:$PATH
-
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh

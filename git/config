@@ -1,2 +1,4 @@
 [core]
 	editor = nvim
+[alias]
+	co = checkout
