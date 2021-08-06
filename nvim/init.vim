@@ -24,7 +24,7 @@ set shiftwidth=4
 
 " Displays whitespace characters
 set list
-set listchars=space:·,tab:\|-,trail:-
+set listchars=space:·,tab:\|-,trail:-,eol:¬
 
 " Disables wrapping
 set nowrap
