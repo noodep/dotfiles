@@ -52,7 +52,9 @@ ZSH_THEME="noodep"
 plugins=(git common-aliases)
 
 # User configuration
-
+export TEXLIVE_INSTALL="/usr/local/texlive/latest/"
+export DENO_INSTALL="$HOME/.deno"
+export PATH="$DENO_INSTALL/bin:$TEXLIVE_INSTALL/bin/x86_64-darwin:$PATH"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
