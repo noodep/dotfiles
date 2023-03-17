@@ -12,6 +12,8 @@ export CLICOLOR=1
 alias l="ls -al"
 alias la="ls -a"
 alias ll="ls -l"
+alias ..="cd .."
+alias ...="cd ../.."
 alias ranger="/Library/Frameworks/Python.framework/Versions/Current/bin/ranger"
 alias ctags="/usr/local/bin/ctags"
 
@@ -29,14 +31,22 @@ bindkey -v
 # enables prompt substitution
 setopt PROMPT_SUBST
 
-function git_status() {
-	# if inside a git repo (by checking if the .git directory exists) then output git status
-	if [ -d .git ]
-	then
-		branch=$(git rev-parse --abbrev-ref HEAD);
-		printf '- %s' ${branch};
-	fi
-}
+# loads built in vcs information module
+autoload -Uz vcs_info
 
-PROMPT=$'%{\e[0;34m%}%B┌─[%b%{\e[0m%}%{\e[1;32m%}%n%{\e[1;34m%}@%{\e[0m%}%{\e[0;36m%}%m%{\e[0;34m%}%B]%b%{\e[0m%} - %b%{\e[0;34m%}%B[%b%{\e[1;37m%}%~%{\e[0;34m%}%B]%b%{\e[0m%}%b%{\e[0m%} $(git_status)
-%{\e[0;34m%}%B└─%B[%{\e[1;35m%}$%{\e[0;34m%}%B]%{\e[0m%}%b '
+# enables %u unstaged and %c staged changes
+zstyle ':vcs_info:*' check-for-changes true
+
+# enables revision information %i
+zstyle ':vcs_info:*' get-revision true
+
+#
+zstyle ':vcs_info:*' unstagedstr '!'
+zstyle ':vcs_info:*' stagedstr '+'
+zstyle ':vcs_info:*' formats '%b %.8i %u%c'
+zstyle ':vcs_info:*' actionformats '%b %.8i|%a %c%u'
+
+precmd () { vcs_info }
+
+PROMPT='%F{4}%B┌─[%b%F{2}%n%F{4}@%F{6}%m%B%F{4}] - [%b%F{7}%~%F{4}%B]%b ${vcs_info_msg_0_}
+%F{4}%B└─[%b%F{5}$ %f%b'
