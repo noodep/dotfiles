@@ -17,6 +17,9 @@ alias ...="cd ../.."
 alias ranger="/Library/Frameworks/Python.framework/Versions/Current/bin/ranger"
 alias ctags="/usr/local/bin/ctags"
 
+# prevents recording of commands that start with a space into zsh_history; useful when exporting secrets for instance
+setopt histignorespace
+
 # enables case insensitive autocompletion
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
