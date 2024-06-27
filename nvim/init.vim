@@ -111,14 +111,3 @@ command! IncVersionNumber if &modified | %s/@version\s\zs\(\d\+\.\d\+\)/\=str2fl
 
 " Strips trailing whitespace
 command! StripTrailingWhitespace %s/\s\+$//e
-
-"--- plugin : vim-javascript "
-" Enables jsdoc highlighting
-let g:javascript_plugin_jsdoc = 1
-
-" Enables javascript folding
-augroup javascript_folding
-	au!
-	au FileType javascript setlocal foldmethod=syntax
-augroup END
-
