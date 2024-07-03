@@ -3,6 +3,7 @@ vim.api.nvim_set_option_value('makeprg', 'deno lint --compact --quiet', { buf = 
 vim.api.nvim_set_option_value('errorformat', 'file://%f: line %l\\, col %c - %m', { buf = 0 })
 
 vim.api.nvim_set_var('javaScript_fold', true)
+vim.api.nvim_set_option_value('signcolumn', 'yes', { win = 0 })
 
 -- Enables jsdoc highlighting
 -- vim.g.javascript_plugin_jsdoc = 1
@@ -28,3 +29,12 @@ vim.keymap.set('n', '<leader>ld', function()
 	vim.cmd('make')
 	set_quickfix_visibility()
 end)
+
+-- lsp setup
+-- use checkhealth lsp to display and inspect lsp status
+local root = vim.fs.root(0, {'deno.json'})
+vim.lsp.start({
+	name = 'deno',
+	cmd = {'deno', 'lsp'},
+	root_dir = root,
+})
