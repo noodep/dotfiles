@@ -2,6 +2,9 @@
 vim.api.nvim_set_option_value('makeprg', 'deno lint --compact --quiet', { buf = 0 })
 vim.api.nvim_set_option_value('errorformat', 'file://%f: line %l\\, col %c - %m', { buf = 0 })
 
+-- use omnicompletion on tap
+-- because content is loaded asynchronously we can't use <c-n> to select the first item
+vim.keymap.set('i', '<tab>', '<c-x><c-o>', { noremap = true })
 vim.api.nvim_set_var('javaScript_fold', true)
 vim.api.nvim_set_option_value('signcolumn', 'yes', { win = 0 })
 
