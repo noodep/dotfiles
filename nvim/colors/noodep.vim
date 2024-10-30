@@ -5,7 +5,7 @@ let g:color_name = "noodep"
 
 hi Normal ctermfg=7
 hi Visual ctermfg=6 ctermbg=8
-hi Comment cterm=italic ctermfg=1
+hi Comment cterm=italic ctermfg=9
 hi String ctermfg=2
 hi Function ctermfg=4
 hi Keyword ctermfg=5
