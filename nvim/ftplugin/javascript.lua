@@ -41,3 +41,10 @@ vim.lsp.start({
 	cmd = {'deno', 'lsp'},
 	root_dir = root,
 })
+
+-- experimental snippets
+--
+vim.keymap.set('n', '<leader>fori', 'ofor (let idx = 0 ; idx < count ; idx++) {<cr>}<esc>/idx<cr>');
+vim.keymap.set('n', '<leader>log', 'i<cr>console.log(@);<cr><esc>/@<cr>');
+vim.keymap.set('n', '<leader>lw', 'yiwoconsole.log(<esc>pa);<esc>');
+vim.keymap.set('v', '<leader>lv', 'yoconsole.log(<esc>pa);<esc>');
