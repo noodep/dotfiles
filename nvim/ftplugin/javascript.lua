@@ -2,7 +2,7 @@
 vim.api.nvim_set_option_value('makeprg', 'deno lint --compact --quiet', { buf = 0 })
 vim.api.nvim_set_option_value('errorformat', 'file://%f: line %l\\, col %c - %m', { buf = 0 })
 
--- use omnicompletion on tap
+-- use omnicompletion on tab
 -- because content is loaded asynchronously we can't use <c-n> to select the first item
 vim.keymap.set('i', '<tab>', '<c-x><c-o>', { noremap = true })
 vim.api.nvim_set_var('javaScript_fold', true)
@@ -35,13 +35,13 @@ end)
 
 -- lsp setup
 -- use checkhealth lsp to display and inspect lsp status
+--
 local root = vim.fs.root(0, {'deno.json'})
 vim.lsp.start({
 	name = 'deno',
 	cmd = {'deno', 'lsp'},
 	root_dir = root,
 })
-
 -- experimental snippets
 --
 vim.keymap.set('n', '<leader>fori', 'ofor (let idx = 0 ; idx < count ; idx++) {<cr>}<esc>/idx<cr>');

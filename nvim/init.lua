@@ -39,7 +39,10 @@ vim.opt.cursorline = true
 -- longest - Inserts the longest common denominator
 -- preview - Shows additionnal information when available
 -- fuzzy   - Enables fuzzy, allowing to type character out of sequence
-vim.opt.completeopt = {'menuone', 'longest', 'preview', 'fuzzy'}
+vim.opt.completeopt = {'menuone', 'noinsert', 'preview', 'fuzzy'}
+-- the behavior of 'fuzzy' and 'longest' is not well defined and just deletes the characters the completion is based on
+--   if 'edges' and 'addEdges' are candidates, the longest chain is just and empty set which is what gets inserted replacing what was typed so far
+-- vim.opt.completeopt = {'menuone', 'longest', 'preview', 'fuzzy'}
 
 -- Remaps insert mode exit to 'TH'
 vim.keymap.set('i', 'TH', '<ESC>')
@@ -97,6 +100,8 @@ vim.keymap.set('', '<leader>e', '<cmd>25Lex<cr>')
 -- init.lua mappings (c stands for configuration)
 vim.keymap.set('', '<leader>cr', '<cmd>source ~/Projects/dotfiles/nvim/init.lua<cr>')
 vim.keymap.set('', '<leader>ce', '<cmd>edit ~/Projects/dotfiles/nvim/init.lua<cr>')
+
+-- lsp mappings
 
 -- Enables automatic striping of trailing whitespace
 vim.api.nvim_create_autocmd('BufWritePre', {
