@@ -106,7 +106,9 @@ vim.keymap.set('n', '[\'', '<cmd>cprev<cr>')
 vim.keymap.set('n', ']\'', '<cmd>cnext<cr>')
 
 -- grep mappings (s stands for search)
-vim.keymap.set('n', '<leader>sg', ':copen | :silent :grep -R')
+-- grep program defaults to 'rg --vimgrep -uu' if ripgrep is available; -uu remove smart filtering (.gitignore and hidden .files) which I want
+vim.opt.grepprg = 'rg --vimgrep'
+vim.keymap.set('n', '<leader>sg', ':copen | :silent :grep')
 
 -- lsp mappings
 
