@@ -13,7 +13,7 @@ vim.cmd('syntax enable')
 vim.cmd('colorscheme noodep')
 
 -- Turns on relative line numbers in the gutter
-vim.opt.number = false
+vim.opt.number = true
 vim.opt.relativenumber = true
 
 -- Keeps the cursor line 30 lines away from the top and bottom edges
@@ -100,6 +100,13 @@ vim.keymap.set('', '<leader>e', '<cmd>25Lex<cr>')
 -- init.lua mappings (c stands for configuration)
 vim.keymap.set('', '<leader>cr', '<cmd>source ~/Projects/dotfiles/nvim/init.lua<cr>')
 vim.keymap.set('', '<leader>ce', '<cmd>edit ~/Projects/dotfiles/nvim/init.lua<cr>')
+
+-- quickfixlist mappings
+vim.keymap.set('n', '[\'', '<cmd>cprev<cr>')
+vim.keymap.set('n', ']\'', '<cmd>cnext<cr>')
+
+-- grep mappings (s stands for search)
+vim.keymap.set('n', '<leader>sg', ':copen | :silent :grep -R')
 
 -- lsp mappings
 
