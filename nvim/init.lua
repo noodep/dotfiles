@@ -34,6 +34,9 @@ vim.opt.wrap = false
 -- Turns on current line highlighting
 vim.opt.cursorline = true
 
+-- Turns on border for floating windows
+vim.opt.winborder = 'rounded'
+
 -- Customizes completion behavior
 -- menuone - Shows the menu even if there is only one item
 -- longest - Inserts the longest common denominator
@@ -110,7 +113,14 @@ vim.keymap.set('n', ']\'', '<cmd>cnext<cr>')
 vim.opt.grepprg = 'rg --vimgrep'
 vim.keymap.set('n', '<leader>sg', ':copen | :silent :grep')
 
--- lsp mappings
+-- diagnostics
+-- enables inline diagnostics for the current line only
+vim.diagnostic.config({
+	-- shows first diagnostic in line with the diagnostic
+	-- virtual_text = { current_line = true },
+	-- shows all diagnostics in virtual lines below the diagnostics
+	virtual_lines = { current_line = true},
+})
 
 -- Enables automatic striping of trailing whitespace
 vim.api.nvim_create_autocmd('BufWritePre', {

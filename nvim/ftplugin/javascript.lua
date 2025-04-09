@@ -2,9 +2,6 @@
 vim.api.nvim_set_option_value('makeprg', 'deno lint --compact --quiet', { buf = 0 })
 vim.api.nvim_set_option_value('errorformat', 'file://%f: line %l\\, col %c - %m', { buf = 0 })
 
--- use omnicompletion on tab
--- because content is loaded asynchronously we can't use <c-n> to select the first item
-vim.keymap.set('i', '<tab>', '<c-x><c-o>', { noremap = true })
 vim.api.nvim_set_var('javaScript_fold', true)
 vim.api.nvim_set_option_value('signcolumn', 'yes', { win = 0 })
 
@@ -33,9 +30,20 @@ vim.keymap.set('n', '<leader>ld', function()
 	set_quickfix_visibility()
 end)
 
+
 -- lsp setup
 -- use checkhealth lsp to display and inspect lsp status
---
+
+-- enables builtin autocompletion
+vim.api.nvim_create_autocmd('LspAttach', {
+	callback = function(ev)
+		local client = vim.lsp.get_client_by_id(ev.data.client_id)
+		if client:supports_method('textDocument/completion') then
+			vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
+		end
+	end,
+})
+-- start lsp (should be replaced with the builtin config introduced in v0.11
 local root = vim.fs.root(0, {'deno.json'})
 vim.lsp.start({
 	name = 'deno',
