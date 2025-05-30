@@ -47,6 +47,12 @@ vim.opt.completeopt = {'menuone', 'noinsert', 'preview', 'fuzzy'}
 --   if 'edges' and 'addEdges' are candidates, the longest chain is just and empty set which is what gets inserted replacing what was typed so far
 -- vim.opt.completeopt = {'menuone', 'longest', 'preview', 'fuzzy'}
 
+
+-- Adds fzf pluging
+vim.opt.runtimepath:append('/opt/homebrew/opt/fzf')
+-- opens fzf
+vim.keymap.set('', '<leader>f', '<cmd>:FZF<cr>')
+
 -- Remaps insert mode exit to 'TH'
 vim.keymap.set('i', 'TH', '<ESC>')
 

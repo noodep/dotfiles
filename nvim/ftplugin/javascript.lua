@@ -33,8 +33,21 @@ end)
 
 -- lsp setup
 -- use checkhealth lsp to display and inspect lsp status
+--
+-- start lsp (should be replaced with the builtin config introduced in v0.11
+vim.lsp.config['denols'] = {
+	cmd = { 'deno', 'lsp'},
+	filetypes = { 'javascript', 'typescript' },
+	root_markers = { 'deno.json' },
+	settings = {
+		deno = {
+			enable = true,
+		}
+	}
+}
 
--- enables builtin autocompletion
+vim.lsp.enable('denols')
+
 vim.api.nvim_create_autocmd('LspAttach', {
 	callback = function(ev)
 		local client = vim.lsp.get_client_by_id(ev.data.client_id)
@@ -43,17 +56,11 @@ vim.api.nvim_create_autocmd('LspAttach', {
 		end
 	end,
 })
--- start lsp (should be replaced with the builtin config introduced in v0.11
-local root = vim.fs.root(0, {'deno.json'})
-vim.lsp.start({
-	name = 'deno',
-	cmd = {'deno', 'lsp'},
-	root_dir = root,
-})
+
 -- experimental snippets
 --
 vim.keymap.set('n', '<leader>fori', 'ofor (let idx = 0 ; idx < count ; idx++) {<cr>}<esc>/idx<cr>');
 vim.keymap.set('n', '<leader>forw', '"syiwofor (const <esc>"spxa of <esc>"spa) {<cr>};<esc>');
 vim.keymap.set('n', '<leader>log', 'i<cr>console.log(@);<cr><esc>/@<cr>');
-vim.keymap.set('n', '<leader>lw', 'yiwoconsole.log(<esc>pa);<esc>');
+vim.keymap.set('n', '<leader>lw', 'yiwoconsole.log("<esc>pa :", <esc>pa);<esc>');
 vim.keymap.set('v', '<leader>lv', 'yoconsole.log(<esc>pa);<esc>');
