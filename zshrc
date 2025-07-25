@@ -27,11 +27,14 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' 'r:|[._-]=* r:|=*' 'l:|=* r:
 autoload -U compinit
 compinit
 
+# loads fzf
+source <(fzf --zsh)
+
 # prompt
-# enables prompt substitution
+## enables prompt substitution
 setopt PROMPT_SUBST
 
-# loads builtin vcs module
+## loads builtin vcs module
 autoload -Uz vcs_info
 
 zstyle ':vcs_info:*' check-for-changes true
@@ -41,7 +44,7 @@ zstyle ':vcs_info:*' stagedstr '⇑'
 zstyle ':vcs_info:*' formats '(%b) %m %i %u%c'
 zstyle ':vcs_info:*' actionformats '(%b|%a)%c%u'
 
-# runs vcs_info before each prompt, populating `vcs_info_msg_0` to be used in `PROMPT`
+## runs vcs_info before each prompt, populating `vcs_info_msg_0` to be used in `PROMPT`
 precmd () { vcs_info }
 
 PROMPT='%F{4}%B┌─[%b%F{2}%n%F{4}@%F{6}%m%B%F{4}] - [%b%F{7}%~%F{4}%B]%b ${vcs_info_msg_0_}
