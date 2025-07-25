@@ -4,6 +4,7 @@
 	co = checkout
 	ds = diff --staged
 	st = status
+	add-edit-trailer = commit --amend --no-edit --trailer='edited-by: Micael Vignati <mvignati@ihmc.org>'
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
