@@ -20,6 +20,9 @@ alias ctags="/usr/local/bin/ctags"
 # prevents recording of commands that start with a space into zsh_history; useful when exporting secrets for instance
 setopt histignorespace
 
+# prevents the session from ending when eof (C-d) is sent to a blank prompt
+setopt ignoreeof
+
 # enables case insensitive autocompletion
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
