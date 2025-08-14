@@ -50,8 +50,8 @@ vim.opt.completeopt = {'menuone', 'noinsert', 'preview', 'fuzzy'}
 
 -- Adds fzf pluging
 vim.opt.runtimepath:append('/opt/homebrew/opt/fzf')
--- opens fzf
-vim.keymap.set('', '<leader>f', '<cmd>:FZF<cr>')
+-- opens fzf - uses ff instead of a single f to avoid the lag induced by vim waiting for another potential character
+vim.keymap.set('', '<leader>ff', '<cmd>:FZF<cr>')
 
 -- Remaps insert mode exit to 'TH'
 vim.keymap.set('i', 'TH', '<ESC>')
