@@ -1,7 +1,8 @@
 set background=dark
 hi clear
+set notermguicolors
 
-let g:color_name = "noodep"
+let g:colors_name = "noodep"
 
 hi Normal ctermfg=7
 hi Visual ctermfg=6 ctermbg=8

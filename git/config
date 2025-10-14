@@ -4,6 +4,7 @@
 	co = checkout
 	ds = diff --staged
 	st = status
+	lg = log --all --graph --oneline
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
