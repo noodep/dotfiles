@@ -5,6 +5,8 @@
 	ds = diff --staged
 	st = status
 	lg = log --all --graph --oneline
+	reset-hard-u = reset --hard @{u}
+
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
