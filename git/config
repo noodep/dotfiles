@@ -1,14 +1,27 @@
 [core]
 	editor = nvim
+
 [alias]
 	co = checkout
 	ds = diff --staged
 	st = status
 	lg = log --all --graph --oneline
 	reset-hard-u = reset --hard @{u}
+	add-edit-trailer = commit --amend --no-edit --trailer=edit
+	add-co-authored-trailer = commit --amend --no-edit --trailer=co-authored
 
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+
+[trailer "edit"]
+	key = edited-by
+	cmd = sh -c 'printf \"%s <%s>\n\" \"$(git config user.name)\" \"$(git config user.email)\"' ; uses a shell wrapper to absorb the defaul argument provided by git trailer
+	ifExists = addIfDifferent
+
+[trailer "co-authored"]
+	key = co-authored-by
+	cmd = sh -c 'printf \"%s <%s>\n\" \"$(git config user.name)\" \"$(git config user.email)\"' ; uses a shell wrapper to absorb the defaul argument provided by git trailer
+	ifExists = addIfDifferent
