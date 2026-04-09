@@ -10,7 +10,7 @@ vim.opt.encoding = 'utf-8'
 -- Enables syntax highlighting and sets colorscheme
 -- in nvim syntax is on by default
 vim.cmd('syntax enable')
-vim.cmd('colorscheme noodep')
+vim.cmd([[colorscheme newdep]])
 
 -- Turns on relative line numbers in the gutter
 vim.opt.number = true
@@ -37,16 +37,24 @@ vim.opt.cursorline = true
 -- Turns on border for floating windows
 vim.opt.winborder = 'rounded'
 
+vim.opt.pumborder = 'rounded'
+
+
 -- Customizes completion behavior
+-- enables autocomplete
+vim.opt.autocomplete = true
+
 -- menuone - Shows the menu even if there is only one item
 -- longest - Inserts the longest common denominator
 -- preview - Shows additionnal information when available
+-- popup   - Shows additionnal information in a popup menu, overrides 'preview'
 -- fuzzy   - Enables fuzzy, allowing to type character out of sequence
-vim.opt.completeopt = {'menuone', 'noinsert', 'preview', 'fuzzy'}
 -- the behavior of 'fuzzy' and 'longest' is not well defined and just deletes the characters the completion is based on
 --   if 'edges' and 'addEdges' are candidates, the longest chain is just and empty set which is what gets inserted replacing what was typed so far
--- vim.opt.completeopt = {'menuone', 'longest', 'preview', 'fuzzy'}
+vim.opt.completeopt = {'menuone', 'noinsert', 'popup', 'fuzzy'}
 
+-- adds omnicompletion
+vim.opt.complete:append('o')
 
 -- Adds fzf pluging
 vim.opt.runtimepath:append('/opt/homebrew/opt/fzf')
