@@ -6,6 +6,7 @@
 	ds = diff --staged
 	st = status
 	lg = log --all --graph --oneline
+	bdf = branch --delete --force
 	reset-hard-u = reset --hard @{u}
 	add-edit-trailer = commit --amend --no-edit --trailer=edit
 	add-co-authored-trailer = commit --amend --no-edit --trailer=co-authored
