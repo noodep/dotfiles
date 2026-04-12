@@ -9,10 +9,8 @@ vim.api.nvim_set_option_value('signcolumn', 'yes', { win = 0 })
 -- vim.g.javascript_plugin_jsdoc = 1
 
 -- check quickfix list status and open if not empty
-function set_quickfix_visibility()
-	local quickfix_list = vim.fn.getqflist()
-
-	if vim.tbl_isempty(quickfix_list) then
+local function set_quickfix_visibility()
+	if vim.fn.getqflist({ size = 0 }).size == 0 then
 		vim.cmd('cclose')
 	else
 		vim.cmd('copen')
@@ -21,46 +19,20 @@ end
 
 vim.keymap.set('n', '<leader>lf', function()
 	local current_buffer = vim.api.nvim_buf_get_name(0)
-	vim.cmd('make ' .. current_buffer)
+	vim.cmd('make ' .. vim.fn.fnameescape(current_buffer))
 	set_quickfix_visibility()
-end)
+end, { buf = 0, silent = true, desc = 'Lint current file' })
 
 vim.keymap.set('n', '<leader>ld', function()
 	vim.cmd('make')
 	set_quickfix_visibility()
-end)
-
-
--- lsp setup
--- use checkhealth lsp to display and inspect lsp status
---
--- start lsp (should be replaced with the builtin config introduced in v0.11
-vim.lsp.config['denols'] = {
-	cmd = { 'deno', 'lsp'},
-	filetypes = { 'javascript', 'typescript' },
-	root_markers = { 'deno.json' },
-	settings = {
-		deno = {
-			enable = true,
-		}
-	}
-}
-
-vim.lsp.enable('denols')
-
-vim.api.nvim_create_autocmd('LspAttach', {
-	callback = function(ev)
-		local client = vim.lsp.get_client_by_id(ev.data.client_id)
-		if client:supports_method('textDocument/completion') then
-			vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
-		end
-	end,
-})
+end, { buf = 0, silent = true, desc = 'Lint project' })
 
 -- experimental snippets
 --
-vim.keymap.set('n', '<leader>fori', 'ofor (let idx = 0 ; idx < count ; idx++) {<cr>}<esc>/idx<cr>');
-vim.keymap.set('n', '<leader>forw', '"syiwofor (const <esc>"spxa of <esc>"spa) {<cr>};<esc>');
-vim.keymap.set('n', '<leader>log', 'i<cr>console.log(@);<cr><esc>/@<cr>');
-vim.keymap.set('n', '<leader>lw', 'yiwoconsole.log("<esc>pa :", <esc>pa);<esc>');
-vim.keymap.set('v', '<leader>lv', 'yoconsole.log(<esc>pa);<esc>');
+vim.keymap.set('n', '<leader>fori', 'ofor (let idx = 0 ; idx < count ; idx++) {<cr>}<esc>/idx<cr>', { buf = 0, silent = true, desc = 'Insert for index loop' })
+vim.keymap.set('n', '<leader>forw', '"syiwofor (const <esc>"spxa of <esc>"spa) {<cr>};<esc>', { buf = 0, silent = true, desc = 'Wrap word in for-of' })
+-- replace with vim.snippet.expand
+vim.keymap.set('n', '<leader>log', 'i<cr>console.log(@);<cr><esc>/@<cr>', { buf = 0, silent = true, desc = 'Insert console.log snippet' })
+vim.keymap.set('n', '<leader>lw', 'yiwoconsole.log("<esc>pa :", <esc>pa);<esc>', { buf = 0, silent = true, desc = 'Log current word' })
+vim.keymap.set('v', '<leader>lv', 'yoconsole.log(<esc>pa);<esc>', { buf = 0, silent = true, desc = 'Log visual selection' })

@@ -1,15 +1,7 @@
--- Disables compatibility with vi
-vim.opt.compatible = false
-
 -- Sets space as leader key
 vim.g.mapleader = ' '
 
--- Ensures encoding is utf-8
-vim.opt.encoding = 'utf-8'
-
 -- Enables syntax highlighting and sets colorscheme
--- in nvim syntax is on by default
-vim.cmd('syntax enable')
 vim.cmd([[colorscheme newdep]])
 
 -- Turns on relative line numbers in the gutter
@@ -44,50 +36,50 @@ vim.opt.pumborder = 'rounded'
 -- enables autocomplete
 vim.opt.autocomplete = true
 
+-- adds omnifunction to completion sources
+vim.opt.complete:append("o")
+
 -- menuone - Shows the menu even if there is only one item
 -- longest - Inserts the longest common denominator
 -- preview - Shows additionnal information when available
 -- popup   - Shows additionnal information in a popup menu, overrides 'preview'
 -- fuzzy   - Enables fuzzy, allowing to type character out of sequence
+vim.opt.completeopt = {'menuone', 'noselect', 'popup', 'fuzzy'}
 -- the behavior of 'fuzzy' and 'longest' is not well defined and just deletes the characters the completion is based on
 --   if 'edges' and 'addEdges' are candidates, the longest chain is just and empty set which is what gets inserted replacing what was typed so far
-vim.opt.completeopt = {'menuone', 'noinsert', 'popup', 'fuzzy'}
-
--- adds omnicompletion
-vim.opt.complete:append('o')
 
 -- Adds fzf pluging
 vim.opt.runtimepath:append('/opt/homebrew/opt/fzf')
 -- opens fzf - uses ff instead of a single f to avoid the lag induced by vim waiting for another potential character
-vim.keymap.set('', '<leader>ff', '<cmd>:FZF<cr>')
+vim.keymap.set('n', '<leader>ff', '<cmd>:FZF<cr>')
 
 -- Remaps insert mode exit to 'TH'
 vim.keymap.set('i', 'TH', '<ESC>')
 
 -- Remaps command key to avoid having to use shift
-vim.keymap.set('', ';', ':')
+vim.keymap.set({ 'n', 'x' }, ';', ':')
 
 -- Rebinds home row for dvorak layout
-vim.keymap.set('', 'd', 'h')
-vim.keymap.set('', 'h', 'j')
-vim.keymap.set('', 't', 'k')
-vim.keymap.set('', 'n', 'l')
+vim.keymap.set({ 'n', 'x', 'o' }, 'd', 'h')
+vim.keymap.set({ 'n', 'x', 'o' }, 'h', 'j')
+vim.keymap.set({ 'n', 'x', 'o' }, 't', 'k')
+vim.keymap.set({ 'n', 'x', 'o' }, 'n', 'l')
 
-vim.keymap.set('', 'j', 'd')
-vim.keymap.set('', 'k', 't')
-vim.keymap.set('', 'l', 'n')
-vim.keymap.set('', 'L', 'N')
+vim.keymap.set({ 'n', 'x', 'o' }, 'j', 'd')
+vim.keymap.set({ 'n', 'x', 'o' }, 'k', 't')
+vim.keymap.set({ 'n', 'x', 'o' }, 'l', 'n')
+vim.keymap.set('n', 'L', 'N')
 
 -- Remaps window navigation to ctrl+{nav-key}
-vim.keymap.set('', '<C-d>', '<C-w>h')
-vim.keymap.set('', '<C-h>', '<C-w>j')
-vim.keymap.set('', '<C-t>', '<C-w>k')
-vim.keymap.set('', '<C-n>', '<C-w>l')
+vim.keymap.set('n', '<C-d>', '<C-w>h')
+vim.keymap.set('n', '<C-h>', '<C-w>j')
+vim.keymap.set('n', '<C-t>', '<C-w>k')
+vim.keymap.set('n', '<C-n>', '<C-w>l')
 
 -- Remaps tag navigation
 -- h follows the tag, t goes back up the stack
-vim.keymap.set('', '<leader>h', '<C-]>')
-vim.keymap.set('', '<leader>t', '<C-t>')
+vim.keymap.set('n', '<leader>h', '<C-]>')
+vim.keymap.set('n', '<leader>t', '<C-t>')
 
 
 -- netrw
@@ -98,10 +90,10 @@ vim.api.nvim_create_autocmd('FileType', {
 	callback = function()
 		local options = { buffer = true }
 		vim.opt_local.bufhidden = 'hide'
-		vim.keymap.set('', 'd', 'h', options)
-		vim.keymap.set('', 'h', 'j', options)
-		vim.keymap.set('', 't', 'k', options)
-		vim.keymap.set('', 'n', 'l', options)
+		vim.keymap.set('n', 'd', 'h', options)
+		vim.keymap.set('n', 'h', 'j', options)
+		vim.keymap.set('n', 't', 'k', options)
+		vim.keymap.set('n', 'n', 'l', options)
 	end,
 })
 
@@ -112,11 +104,11 @@ vim.g.netrw_banner = 0
 vim.g.netrw_liststyle = 3
 
 -- opens netrw
-vim.keymap.set('', '<leader>e', '<cmd>25Lex<cr>')
+vim.keymap.set('n', '<leader>e', '<cmd>25Lex<cr>')
 
 -- init.lua mappings (c stands for configuration)
-vim.keymap.set('', '<leader>cr', '<cmd>source ~/Projects/dotfiles/nvim/init.lua<cr>')
-vim.keymap.set('', '<leader>ce', '<cmd>edit ~/Projects/dotfiles/nvim/init.lua<cr>')
+vim.keymap.set('n', '<leader>cr', '<cmd>source ~/Projects/dotfiles/nvim/init.lua<cr>')
+vim.keymap.set('n', '<leader>ce', '<cmd>edit ~/Projects/dotfiles/nvim/init.lua<cr>')
 
 -- quickfixlist mappings
 vim.keymap.set('n', '[\'', '<cmd>cprev<cr>')
@@ -140,13 +132,25 @@ vim.diagnostic.config({
 vim.api.nvim_create_autocmd('BufWritePre', {
 	pattern = "*",
 	callback = function()
-		-- Saves the current cursor position
-		local cursor = vim.api.nvim_win_get_cursor(0)
+		-- Saves the current window view
+		local view = vim.fn.winsaveview()
 
 		-- Removes trailing whitespace with a substitute command
 		vim.cmd([[%s/\s\+$//e]])
 
-		-- Restores the cursor position
-		vim.api.nvim_win_set_cursor(0, cursor)
+		-- Restores the previous window view
+		vim.fn.winrestview(view)
 	end,
 })
+
+-- lsp
+vim.api.nvim_create_autocmd('LspAttach', {
+	callback = function(ev)
+		local client = vim.lsp.get_client_by_id(ev.data.client_id)
+		if client:supports_method('textDocument/completion') then
+			vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
+		end
+	end,
+})
+
+vim.lsp.enable('denols')
